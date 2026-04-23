@@ -51,12 +51,14 @@
     }
 
     .logo-img {
-      width: 64px;
-      height: 64px;
+      width: 70px;
+      height: 70px;
       object-fit: contain;
-      border-radius: 16px;
-      background: #f8fafc;
-      padding: 4px;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 5px;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
     .brand-text h1 {
@@ -281,8 +283,13 @@
 
     .footer-logo img {
       width: 60px;
+      height: 60px;
+      object-fit: contain;
       filter: brightness(1.2);
       margin-bottom: 12px;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
     }
 
     .footer-contact p, .footer-contact a {
@@ -363,6 +370,10 @@
       .social-links {
         justify-content: flex-start;
       }
+      .logo-img {
+        width: 55px;
+        height: 55px;
+      }
     }
   </style>
 </head>
@@ -370,7 +381,8 @@
   <header class="header">
     <div class="container">
       <div class="logo-area">
-        <img src="image.png" alt="ODK Solutions Hub logo" class="logo-img">
+        <!-- Logo with image.jpg -->
+        <img src="image.jpg" alt="ODK Solutions Hub logo" class="logo-img">
         <div class="brand-text">
           <h1>ODK Solutions Hub</h1>
           <div class="sub">Obeng Dominic Koranteng</div>
@@ -399,7 +411,8 @@
           </div>
         </div>
         <div class="hero-image">
-          <img src="image.png" alt="ODK Solutions Hub official logo">
+          <!-- Hero logo also uses image.jpg -->
+          <img src="image.jpg" alt="ODK Solutions Hub official logo">
         </div>
       </div>
     </section>
@@ -537,7 +550,8 @@
         <!-- Brand column -->
         <div>
           <div class="footer-logo">
-            <img src="image.png" alt="ODK logo small">
+            <!-- Footer logo also uses image.jpg -->
+            <img src="image.jpg" alt="ODK logo small">
             <p><strong>ODK Solutions Hub</strong><br>Obeng Dominic Koranteng</p>
           </div>
           <p style="margin-top: 12px; color: #cbd5e1;">Empowering students through data & mathematics.</p>
