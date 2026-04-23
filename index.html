@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>ODK Solutions Hub | Data Analysis & Math Tutoring</title>
+  <!-- Font Awesome 6 for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #ffffff;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header & logo */
+    .header {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 0;
+    }
+
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: #f8fafc;
+      padding: 4px;
+    }
+
+    .brand-text h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0f3b5e;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-text .sub {
+      font-size: 0.9rem;
+      color: #2563eb;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #334155;
+      transition: color 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    /* hero */
+    .hero {
+      background: linear-gradient(105deg, #f0f7ff 0%, #ffffff 80%);
+      padding: 60px 0;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1 1 400px;
+    }
+
+    .hero-text h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #0b2b4a;
+      line-height: 1.2;
+    }
+
+    .highlight {
+      color: #2563eb;
+      position: relative;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      margin: 20px 0 28px;
+      color: #475569;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 8px 18px rgba(37,99,235,0.25);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-outline {
+      border: 2px solid #2563eb;
+      color: #2563eb;
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: #eff6ff;
+    }
+
+    .hero-image {
+      flex: 1 1 320px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      max-width: 260px;
+      height: auto;
+      border-radius: 24px;
+      background: white;
+      padding: 12px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+    }
+
+    /* sections */
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #0f3b5e;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      color: #475569;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 48px;
+      font-size: 1.1rem;
+    }
+
+    .services-grid, .prep-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+
+    .service-card {
+      background: #f9fafc;
+      padding: 28px 20px;
+      border-radius: 24px;
+      transition: 0.25s;
+      border: 1px solid #edf2f7;
+      text-align: center;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 18px 30px -10px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+      border-color: #cbd5e1;
+    }
+
+    .service-icon {
+      font-size: 2.6rem;
+      color: #2563eb;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      font-weight: 650;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .testimonial {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.04);
+      border: 1px solid #f1f5f9;
+      font-style: italic;
+    }
+
+    .testimonial .student {
+      font-weight: 700;
+      margin-top: 16px;
+      font-style: normal;
+      color: #0f3b5e;
+    }
+
+    .testimonial .role {
+      font-weight: 400;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .stars {
+      color: #f59e0b;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      background: #0f2b40;
+      color: #e2e8f0;
+      padding: 40px 0 20px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .footer-logo img {
+      width: 60px;
+      filter: brightness(1.2);
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 700px) {
+      .header .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        margin-top: 12px;
+        gap: 16px;
+      }
+      .hero-text h2 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo-area">
+        <!-- uploaded logo: ODK SOLUTIONS HUB image reference -->
+        <img src="image.png" alt="ODK Solutions Hub logo" class="logo-img">
+        <div class="brand-text">
+          <h1>ODK Solutions Hub</h1>
+          <div class="sub">Obeng Dominic Koranteng</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#services">Services</a>
+        <a href="#test-prep">Test Prep</a>
+        <a href="#research">Research</a>
+        <a href="#testimonials">Testimonials</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <h2>Your Path to <span class="highlight">Academic & Research Excellence</span> through Data & Math</h2>
+          <p>Expert data analysis training, research support, and mathematics tutoring for students at every level — from JHS to postgraduate.</p>
+          <div class="btn-group">
+            <a href="#services" class="btn btn-primary">Explore Services</a>
+            <a href="#testimonials" class="btn btn-outline">Student Success</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="image.png" alt="ODK Solutions Hub official logo">
+        </div>
+      </div>
+    </section>
+
+    <!-- Services: data analysis & academic support -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">What We Do Best</h2>
+        <p class="section-subtitle">ODK Solutions Hub provides comprehensive academic support, blending data proficiency with mathematics mastery.</p>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
+            <h3>Data Analysis Training</h3>
+            <p>Hands-on training in statistical tools (Excel, SPSS, R, Python) for students and professionals. Learn to clean, analyze, and visualize data effectively.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Academic & Research Support</h3>
+            <p>Undergraduate & postgraduate research guidance: methodology, data analysis, and clear discussion of results to achieve academic distinction.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-calculator"></i></div>
+            <h3>Mathematics Tutoring</h3>
+            <p>Expert tutoring for JHS, SHS, A-Level, O-Level, and university math courses. Simplifying complex concepts with patience and clarity.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-file-alt"></i></div>
+            <h3>Professional Research Analysis</h3>
+            <p>Rigorous data analysis and interpretation for theses, dissertations, and projects. We help you present results with confidence.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- International test prep & detailed math -->
+    <section id="test-prep" style="background: #f8fafc;">
+      <div class="container">
+        <h2 class="section-title">International Test Prep & Math Specialization</h2>
+        <p class="section-subtitle">We prepare students for global exams and strengthen mathematical foundations.</p>
+        <div class="prep-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-globe"></i></div>
+            <h3>GRE / GMAT</h3>
+            <p>Quantitative reasoning, data interpretation, and advanced math strategies for top scores.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
+            <h3>IELTS / SAT</h3>
+            <p>Mathematics and analytical writing support, plus test-taking techniques for international exams.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-school"></i></div>
+            <h3>A-Level & O-Level Math</h3>
+            <p>Pure Math, Mechanics, Statistics. Cambridge & Edexcel curricula covered in depth.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-user-graduate"></i></div>
+            <h3>JHS / SHS & University Math</h3>
+            <p>Core and elective mathematics, calculus, linear algebra, and engineering math support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research support detail -->
+    <section id="research">
+      <div class="container" style="max-width: 900px; text-align: center;">
+        <h2 class="section-title">Undergraduate & Postgraduate Research</h2>
+        <p style="font-size: 1.2rem; color: #334155; margin-bottom: 30px;">
+          From proposal to final defense, ODK Solutions Hub provides end-to-end research support. We perform rigorous data analysis (quantitative & qualitative) and craft comprehensive discussions that align with academic standards. Our goal is to help you defend your work with clarity and earn the grade you deserve.
+        </p>
+        <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
+          <div style="background: #eff6ff; padding: 20px; border-radius: 20px; width: 200px;">
+            <i class="fas fa-database" style="font-size: 2rem; color: #2563eb;"></i>
+            <h4 style="margin-top: 12px;">Data Cleaning</h4>
+          </div>
+          <div style="background: #eff6ff; padding: 20px; border-radius: 20px; width: 200px;">
+            <i class="fas fa-chart-pie" style="font-size: 2rem; color: #2563eb;"></i>
+            <h4 style="margin-top: 12px;">Statistical Modeling</h4>
+          </div>
+          <div style="background: #eff6ff; padding: 20px; border-radius: 20px; width: 200px;">
+            <i class="fas fa-pen-fancy" style="font-size: 2rem; color: #2563eb;"></i>
+            <h4 style="margin-top: 12px;">Discussion & Write-up</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials from students/clients -->
+    <section id="testimonials" style="background: #ffffff;">
+      <div class="container">
+        <h2 class="section-title">What Our Students Say</h2>
+        <p class="section-subtitle">Real feedback from some students and researchers we've supported.</p>
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"ODK Solutions Hub transformed my GRE quantitative score. The data analysis approach made difficult concepts simple. I moved from 148 to 164!"</p>
+            <div class="student">Harriet Agyeiwaa Frimpong</div>
+            <div class="role">GRE Candidate, Qatar</div>
+          </div>
+          <div class="testimonial">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"My postgraduate thesis was stuck until I found ODK. They analyzed my data and explained every result. I defended with confidence. Highly recommended!"</p>
+            <div class="student">Kofi Asante</div>
+            <div class="role">MPhil Education, University of Cape Coast</div>
+          </div>
+          <div class="testimonial">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"A-Level Further Math was a nightmare, but Mr. Obeng's tutoring made it enjoyable. I got an A*!"</p>
+            <div class="student">Benard Thorpe</div>
+            <div class="role">A-Level Student, England</div>
+          </div>
+          <div class="testimonial">
+            <div class="stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p>"I needed R analysis for my undergraduate project. ODK delivered clean results and a detailed interpretation. My supervisor was impressed."</p>
+            <div class="student">Deborah Bani</div>
+            <div class="role">BSc Dentistry, KNUST</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-logo">
+        <img src="image.png" alt="ODK logo small">
+        <p><strong>ODK Solutions Hub</strong><br>Obeng Dominic Koranteng</p>
+      </div>
+      <div>
+        <h4>Contact & Inquiries</h4>
+        <p><i class="fas fa-envelope"></i> odksolutionshub@gmail.com<br>
+        <i class="fas fa-phone-alt"></i> +233 24 505 1371<br>
+        <i class="fas fa-map-marker-alt"></i> Accra, Ghana (Remote & In-person)</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <p><a href="#" style="color:#cbd5e1; text-decoration: none;">Home</a><br>
+        <a href="#services" style="color:#cbd5e1; text-decoration: none;">Services</a><br>
+        <a href="#testimonials" style="color:#cbd5e1; text-decoration: none;">Testimonials</a></p>
+      </div>
+    </div>
+    <div class="container" style="margin-top: 28px; border-top: 1px solid #334155; padding-top: 16px; text-align: center; font-size: 0.9rem;">
+      &copy; 2025 ODK Solutions Hub – Obeng Dominic Koranteng. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
