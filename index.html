@@ -1,607 +1,1708 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>ODK Solutions Hub | Data Analysis & Math Tutoring</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ODK Solutions Hub | Data Analysis & Mathematics Tutoring</title>
+  <meta name="description" content="ODK Solutions Hub provides expert data analysis training, mathematics tutoring, academic research support, and international test prep for students at all levels." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --navy: #0d2a6e;
+      --navy-dark: #071a4a;
+      --navy-mid: #1a3d8f;
+      --gold: #f5c842;
+      --gold-light: #fde98a;
+      --white: #ffffff;
+      --off-white: #f4f6fb;
+      --text-body: #1e2d5a;
+      --text-muted: #5a6a99;
+      --border: rgba(13, 42, 110, 0.12);
+      --shadow: 0 8px 40px rgba(13, 42, 110, 0.13);
+      --radius: 18px;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      background: #ffffff;
-      color: #1e293b;
-      line-height: 1.5;
-      scroll-behavior: smooth;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-body);
+      overflow-x: hidden;
     }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 24px;
+    /* ─── UTILITY ─────────────────────────────────────── */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+    .tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 18px;
     }
-
-    .header {
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 16px 0;
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      line-height: 1.13;
+      color: var(--navy-dark);
     }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-top: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: all 0.28s cubic-bezier(.4,0,.2,1);
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy-dark);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(245,200,66,.35); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.45);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.12); border-color: var(--white); }
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-navy:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(13,42,110,.25); }
 
-    .header .container {
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(7, 26, 74, 0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 40px rgba(7,26,74,0.45); }
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
+      height: 72px;
     }
-
-    .logo-area {
+    .nav-logo {
       display: flex;
       align-items: center;
-      gap: 16px;
-    }
-
-    /* Logo styling - with fallback background */
-    .logo-img {
-      width: 70px;
-      height: 70px;
-      object-fit: contain;
-      border-radius: 12px;
-      background: #f0f7ff;
-      padding: 5px;
-      border: 2px solid #2563eb;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    /* Fallback if image doesn't load */
-    .logo-fallback {
-      width: 70px;
-      height: 70px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #2563eb, #0f3b5e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700;
-      font-size: 1.5rem;
-      border: 2px solid #2563eb;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-
-    .brand-text h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #0f3b5e;
-      letter-spacing: -0.5px;
-    }
-
-    .brand-text .sub {
-      font-size: 0.9rem;
-      color: #2563eb;
-      font-weight: 500;
-      margin-top: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-      font-weight: 500;
-    }
-
-    .nav-links a {
+      gap: 12px;
       text-decoration: none;
-      color: #334155;
-      transition: color 0.2s;
-      font-size: 0.95rem;
     }
-
-    .nav-links a:hover {
-      color: #2563eb;
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+      border-radius: 8px;
     }
-
-    .hero {
-      background: linear-gradient(105deg, #f0f7ff 0%, #ffffff 80%);
-      padding: 60px 0;
-    }
-
-    .hero-content {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .hero-text {
-      flex: 1 1 400px;
-    }
-
-    .hero-text h2 {
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: #0b2b4a;
+    .nav-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--white);
       line-height: 1.2;
     }
-
-    .highlight {
-      color: #2563eb;
-    }
-
-    .hero-text p {
-      font-size: 1.2rem;
-      margin: 20px 0 28px;
-      color: #475569;
-    }
-
-    .btn-group {
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links {
       display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
     }
-
-    .btn {
-      padding: 12px 28px;
-      border-radius: 40px;
-      font-weight: 600;
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
-      display: inline-block;
-      transition: 0.2s;
-      border: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { margin-left: 8px; padding: 10px 22px !important; font-size: 0.87rem !important; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
       cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--navy-dark);
+      padding: 20px 28px 28px;
+      gap: 18px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
-    .btn-primary {
-      background: #2563eb;
-      color: white;
-      box-shadow: 0 8px 18px rgba(37,99,235,0.25);
+    /* ─── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, #0f3d9c 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 72px;
     }
-
-    .btn-primary:hover {
-      background: #1d4ed8;
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(245,200,66,1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,1) 0%, transparent 40%),
+        repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(255,255,255,0.03) 50px, rgba(255,255,255,0.03) 51px);
     }
-
-    .btn-outline {
-      border: 2px solid #2563eb;
-      color: #2563eb;
-      background: transparent;
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
     }
-
-    .btn-outline:hover {
-      background: #eff6ff;
+    .hero-orb-1 {
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(245,200,66,0.18) 0%, transparent 70%);
+      top: -100px; right: -80px;
     }
-
-    .hero-image {
-      flex: 1 1 320px;
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+      bottom: -80px; left: -80px;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .hero-left { animation: fadeSlideUp 0.9s cubic-bezier(.4,0,.2,1) both; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,200,66,0.15);
+      border: 1px solid rgba(245,200,66,0.3);
+      color: var(--gold);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 50px;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before { content: '★'; font-size: 0.8rem; }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--white);
+      line-height: 1.08;
+      margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-desc {
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.8;
+      margin-bottom: 38px;
+      max-width: 500px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 52px;
+      padding-top: 36px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--gold);
+    }
+    .hero-stat-label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 2px;
+    }
+    .hero-right {
       display: flex;
       justify-content: center;
+      animation: fadeSlideUp 0.9s 0.2s cubic-bezier(.4,0,.2,1) both;
     }
-
-    .hero-image img {
-      max-width: 260px;
-      height: auto;
+    .hero-card-stack { position: relative; width: 100%; max-width: 460px; }
+    .hero-main-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
       border-radius: 24px;
-      background: white;
-      padding: 12px;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+      backdrop-filter: blur(12px);
+      padding: 36px;
+      position: relative;
     }
-
-    section {
-      padding: 70px 0;
+    .hero-card-icon {
+      width: 54px; height: 54px;
+      background: var(--gold);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 18px;
     }
-
-    .section-title {
-      font-size: 2.2rem;
+    .hero-card-title {
+      font-family: 'Syne', sans-serif;
       font-weight: 700;
-      color: #0f3b5e;
-      margin-bottom: 16px;
-      text-align: center;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .hero-card-text { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .hero-floating-card {
+      position: absolute;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: 0 20px 60px rgba(7,26,74,0.35);
+      animation: float 4s ease-in-out infinite;
+    }
+    .hero-floating-card-1 { top: -28px; right: -28px; }
+    .hero-floating-card-2 { bottom: -24px; left: -28px; animation-delay: 1.5s; }
+    .hfc-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 500; }
+    .hfc-value {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--navy-dark);
+    }
+    .hfc-value span { font-size: 0.8rem; font-weight: 500; color: #22c55e; }
+    .hero-services-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.8);
+      font-size: 0.78rem;
+      padding: 5px 12px;
+      border-radius: 50px;
     }
 
-    .section-subtitle {
-      color: #475569;
+    /* ─── SERVICES ────────────────────────────────────── */
+    #services { padding: 100px 0; background: var(--off-white); }
+    .services-header { text-align: center; margin-bottom: 64px; }
+    .services-header .section-sub { margin: 14px auto 0; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 30px;
+      border: 1px solid var(--border);
+      transition: all 0.35s cubic-bezier(.4,0,.2,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: transparent; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 58px; height: 58px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      margin-bottom: 22px;
+    }
+    .service-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--navy-dark);
+      margin-bottom: 10px;
+    }
+    .service-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.72; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+    .service-tag {
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--off-white);
+      padding: 4px 10px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+    }
+
+    /* ─── WHY US ──────────────────────────────────────── */
+    #why {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #why::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg, transparent, transparent 60px,
+        rgba(255,255,255,0.02) 60px, rgba(255,255,255,0.02) 61px
+      );
+    }
+    .why-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-left .section-title { color: var(--white); }
+    .why-left .section-sub { color: rgba(255,255,255,0.6); }
+    .why-features { margin-top: 40px; display: flex; flex-direction: column; gap: 22px; }
+    .why-feature {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .why-feature-icon {
+      width: 46px; height: 46px;
+      min-width: 46px;
+      background: rgba(245,200,66,0.15);
+      border: 1px solid rgba(245,200,66,0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+    .why-feature-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+    .why-feature-text { font-size: 0.88rem; color: rgba(255,255,255,0.58); line-height: 1.7; }
+    .why-right { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .why-stat-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 28px 24px;
       text-align: center;
-      max-width: 700px;
-      margin: 0 auto 48px;
+      transition: all 0.3s;
+    }
+    .why-stat-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+    .why-stat-card:nth-child(2) { margin-top: 28px; }
+    .why-stat-card:nth-child(4) { margin-top: 28px; }
+    .wsc-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2.5rem;
+      color: var(--gold);
+      display: block;
+    }
+    .wsc-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 6px; }
+
+    /* ─── PROGRAMS ────────────────────────────────────── */
+    #programs { padding: 100px 0; }
+    .programs-header { margin-bottom: 60px; }
+    .programs-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .prog-tab {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      cursor: pointer;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.25s;
+    }
+    .prog-tab.active, .prog-tab:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .prog-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .prog-card:hover { box-shadow: var(--shadow); border-color: var(--navy); transform: translateY(-4px); }
+    .prog-level {
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--navy-mid);
+      background: rgba(13,42,110,0.07);
+      padding: 4px 10px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .prog-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy-dark);
+      margin-bottom: 8px;
+    }
+    .prog-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.65; }
+    .prog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .prog-meta-item { font-size: 0.8rem; color: var(--text-muted); }
+    .prog-meta-item strong { color: var(--navy-dark); font-weight: 600; }
+    .prog-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 50px;
+      background: rgba(245,200,66,0.15);
+      color: #92700a;
+    }
+
+    /* ─── HOW IT WORKS ────────────────────────────────── */
+    #process { padding: 100px 0; background: var(--off-white); }
+    .process-header { text-align: center; margin-bottom: 70px; }
+    .process-header .section-sub { margin: 14px auto 0; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 46px;
+      left: calc(12.5%);
+      right: calc(12.5%);
+      height: 2px;
+      background: linear-gradient(90deg, var(--navy) 0%, var(--gold) 100%);
+      z-index: 0;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      border: 4px solid var(--off-white);
+      box-shadow: 0 0 0 3px var(--navy);
+    }
+    .step:last-child .step-num { background: var(--gold); color: var(--navy-dark); box-shadow: 0 0 0 3px var(--gold); }
+    .step-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy-dark);
+      margin-bottom: 8px;
+    }
+    .step-text { font-size: 0.86rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ─── TESTIMONIALS ────────────────────────────────── */
+    #testimonials { padding: 100px 0; background: var(--white); }
+    .testi-header { text-align: center; margin-bottom: 64px; }
+    .testi-header .section-sub { margin: 14px auto 0; }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testi-card {
+      background: var(--off-white);
+      border-radius: var(--radius);
+      padding: 34px 28px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+      position: relative;
+    }
+    .testi-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); background: var(--white); }
+    .testi-card.featured {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 100%);
+      border-color: transparent;
+      color: var(--white);
+    }
+    .testi-quote {
+      font-size: 2.5rem;
+      line-height: 1;
+      color: var(--gold);
+      font-family: 'Syne', sans-serif;
+      margin-bottom: 16px;
+    }
+    .testi-text {
+      font-size: 0.93rem;
+      line-height: 1.78;
+      color: var(--text-body);
+      font-style: italic;
+    }
+    .testi-card.featured .testi-text { color: rgba(255,255,255,0.82); }
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .testi-card.featured .testi-author { border-top-color: rgba(255,255,255,0.12); }
+    .testi-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .testi-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--navy-dark);
+    }
+    .testi-card.featured .testi-name { color: var(--white); }
+    .testi-role { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+    .testi-card.featured .testi-role { color: rgba(255,255,255,0.55); }
+    .testi-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 14px; }
+
+    /* ─── ABOUT ───────────────────────────────────────── */
+    #about { padding: 100px 0; background: var(--off-white); }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-image-block { position: relative; }
+    .about-img-card {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: 24px;
+      padding: 50px 40px;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.03) 30px, rgba(255,255,255,0.03) 31px);
+    }
+    .about-img-card-content { position: relative; z-index: 2; }
+    .about-big-icon { font-size: 4rem; margin-bottom: 18px; }
+    .about-card-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .about-card-title { font-size: 0.9rem; color: var(--gold); font-weight: 500; }
+    .about-floating {
+      position: absolute;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 18px 22px;
+      box-shadow: var(--shadow);
+    }
+    .about-floating-1 { bottom: -20px; right: -20px; }
+    .about-floating-2 { top: -20px; left: -20px; }
+    .about-fl-val {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--navy-dark);
+    }
+    .about-fl-label { font-size: 0.75rem; color: var(--text-muted); }
+    .about-text h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--navy-dark);
+      margin: 28px 0 12px;
+    }
+    .about-text p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 14px; }
+    .about-certs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .cert-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy-dark);
+    }
+    .cert-badge span { font-size: 1rem; }
+
+    /* ─── FAQ ─────────────────────────────────────────── */
+    #faq { padding: 100px 0; }
+    .faq-header { text-align: center; margin-bottom: 60px; }
+    .faq-header .section-sub { margin: 14px auto 0; }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.25s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 24px rgba(13,42,110,0.08); }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 26px;
+      cursor: pointer;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--navy-dark);
+      background: var(--white);
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+    .faq-icon {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--navy);
+      transition: transform 0.3s, background 0.3s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--navy); color: var(--white); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(.4,0,.2,1), padding 0.3s;
+      padding: 0 26px;
+      font-size: 0.93rem;
+      color: var(--text-muted);
+      line-height: 1.78;
+      background: var(--white);
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 26px 22px; }
+
+    /* ─── CTA BANNER ──────────────────────────────────── */
+    #cta {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #0f3d9c 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #cta::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,200,66,0.12), transparent 65%);
+      right: -150px; top: -200px;
+    }
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .cta-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .cta-title em { font-style: normal; color: var(--gold); }
+    .cta-sub { font-size: 1.08rem; color: rgba(255,255,255,0.65); max-width: 540px; margin: 0 auto 40px; line-height: 1.75; }
+    .cta-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .cta-contact {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      flex-wrap: wrap;
+      margin-top: 50px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item:hover { color: var(--gold); }
+    .contact-item-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.1rem;
     }
 
-    .services-grid, .prep-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 28px;
-    }
-
-    .service-card {
-      background: #f9fafc;
-      padding: 28px 20px;
-      border-radius: 24px;
-      transition: 0.25s;
-      border: 1px solid #edf2f7;
-      text-align: center;
-    }
-
-    .service-card:hover {
-      box-shadow: 0 18px 30px -10px rgba(0,0,0,0.08);
-      transform: translateY(-4px);
-      border-color: #cbd5e1;
-    }
-
-    .service-icon {
-      font-size: 2.6rem;
-      color: #2563eb;
-      margin-bottom: 18px;
-    }
-
-    .service-card h3 {
-      font-size: 1.4rem;
-      font-weight: 650;
-      margin-bottom: 12px;
-    }
-
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-      margin-top: 20px;
-    }
-
-    .testimonial {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.04);
-      border: 1px solid #f1f5f9;
-      font-style: italic;
-    }
-
-    .testimonial .student {
-      font-weight: 700;
-      margin-top: 16px;
-      font-style: normal;
-      color: #0f3b5e;
-    }
-
-    .testimonial .role {
-      font-weight: 400;
-      color: #64748b;
-      font-size: 0.9rem;
-    }
-
-    .stars {
-      color: #f59e0b;
-      margin-bottom: 12px;
-    }
-
+    /* ─── FOOTER ──────────────────────────────────────── */
     footer {
-      background: #0f2b40;
-      color: #e2e8f0;
-      padding: 50px 0 20px;
+      background: var(--navy-dark);
+      color: rgba(255,255,255,0.55);
+      padding: 70px 0 32px;
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
-
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 36px;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 56px;
     }
-
-    .footer-logo img {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      filter: brightness(1.2);
-      margin-bottom: 12px;
-      border-radius: 8px;
-      background: white;
-      padding: 3px;
-    }
-
-    .footer-contact p, .footer-contact a {
+    .footer-brand p { font-size: 0.88rem; line-height: 1.75; margin-top: 16px; max-width: 280px; }
+    .footer-logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 12px;
-      color: #e2e8f0;
       text-decoration: none;
-      flex-wrap: wrap;
     }
-
-    .footer-contact i {
-      width: 20px;
+    .footer-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
       font-size: 1.1rem;
-      color: #60a5fa;
+      color: var(--white);
     }
-
-    .social-links {
+    .footer-logo-text span { color: var(--gold); }
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.86rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.82rem;
       flex-wrap: wrap;
-      gap: 18px;
-      margin-top: 16px;
+      gap: 12px;
     }
-
-    .social-links a {
-      background: #1e3a5c;
-      color: white;
-      width: 44px;
-      height: 44px;
+    .footer-socials { display: flex; gap: 10px; }
+    .social-btn {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      font-size: 1.3rem;
-      transition: all 0.25s;
+      color: rgba(255,255,255,0.6);
       text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s;
     }
+    .social-btn:hover { background: var(--gold); color: var(--navy-dark); }
 
-    .social-links a:hover {
-      background: #2563eb;
-      transform: translateY(-3px);
+    /* ─── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
-    .footer-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      display: block;
-      margin-bottom: 10px;
-      transition: color 0.2s;
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
     }
-
-    .footer-links a:hover {
-      color: white;
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
     }
+    .reveal.visible { opacity: 1; transform: none; }
 
-    .copyright {
-      margin-top: 40px;
-      border-top: 1px solid #334155;
-      padding-top: 20px;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #94a3b8;
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-content { grid-template-columns: 1fr; gap: 50px; }
+      .hero-right { display: none; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-inner { grid-template-columns: 1fr; gap: 50px; }
+      .why-right { grid-template-columns: repeat(4, 1fr); }
+      .why-stat-card:nth-child(2), .why-stat-card:nth-child(4) { margin-top: 0; }
+      .steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .steps::before { display: none; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-image-block { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
-
-    @media (max-width: 700px) {
-      .header .container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-links {
-        margin-top: 12px;
-        gap: 16px;
-      }
-      .hero-text h2 {
-        font-size: 2.2rem;
-      }
-      .social-links {
-        justify-content: flex-start;
-      }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .programs-grid { grid-template-columns: 1fr; }
+      .why-right { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cta-contact { gap: 20px; }
+      .hero-stats { gap: 20px; }
+      .steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="logo-area">
-        <!-- Try to load image, show fallback if it fails -->
-        <img src="image.jpg" alt="ODK Solutions Hub logo" class="logo-img" 
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="logo-fallback" style="display: none;">ODK</div>
-        <div class="brand-text">
-          <h1>ODK Solutions Hub</h1>
-          <div class="sub">Obeng Dominic Koranteng</div>
-        </div>
-      </div>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#services">Services</a>
-        <a href="#test-prep">Test Prep</a>
-        <a href="#research">Research</a>
-        <a href="#testimonials">Testimonials</a>
-      </div>
+
+<!-- ═══ NAV ════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="odk-logo.png" alt="ODK Solutions Hub Logo" onerror="this.style.display='none'" />
+        <div class="nav-logo-text"><span>ODK</span> Solutions Hub</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#cta" class="btn btn-primary nav-cta">Get Started</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </header>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" class="mob-link">Services</a>
+    <a href="#programs" class="mob-link">Programs</a>
+    <a href="#about" class="mob-link">About</a>
+    <a href="#testimonials" class="mob-link">Testimonials</a>
+    <a href="#faq" class="mob-link">FAQ</a>
+    <a href="#cta" class="btn btn-primary" style="text-align:center;">Get Started</a>
+  </div>
+</nav>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-content">
-        <div class="hero-text">
-          <h2>Your Path to <span class="highlight">Academic & Research Excellence</span> through Data & Math</h2>
-          <p>Expert data analysis training, research support, and mathematics tutoring for students at every level — from JHS to postgraduate.</p>
-          <div class="btn-group">
-            <a href="#services" class="btn btn-primary">Explore Services</a>
-            <a href="#testimonials" class="btn btn-outline">Student Success</a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="image.jpg" alt="ODK Solutions Hub official logo" 
-               onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%232563eb%22 width=%22200%22 height=%22200%22 rx=%2220%22/%3E%3Ctext fill=%22white%22 font-size=%2280%22 font-weight=%22bold%22 x=%2250%25%22 y=%2255%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22%3EODK%3C/text%3E%3C/svg%3E'">
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="container">
-        <h2 class="section-title">What We Do Best</h2>
-        <p class="section-subtitle">ODK Solutions Hub provides comprehensive academic support, blending data proficiency with mathematics mastery.</p>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
-            <h3>Data Analysis Training</h3>
-            <p>Hands-on training in statistical tools (Excel, SPSS, R, Python) for students and professionals. Learn to clean, analyze, and visualize data effectively.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
-            <h3>Academic & Research Support</h3>
-            <p>Undergraduate & postgraduate research guidance: methodology, data analysis, and clear discussion of results to achieve academic distinction.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-calculator"></i></div>
-            <h3>Mathematics Tutoring</h3>
-            <p>Expert tutoring for JHS, SHS, A-Level, O-Level, and university math courses. Simplifying complex concepts with patience and clarity.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-file-alt"></i></div>
-            <h3>Professional Research Analysis</h3>
-            <p>Rigorous data analysis and interpretation for theses, dissertations, and projects. We help you present results with confidence.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="test-prep" style="background: #f8fafc;">
-      <div class="container">
-        <h2 class="section-title">International Test Prep & Math Specialization</h2>
-        <p class="section-subtitle">We prepare students for global exams and strengthen mathematical foundations.</p>
-        <div class="prep-grid">
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-globe"></i></div>
-            <h3>GRE / GMAT</h3>
-            <p>Quantitative reasoning, data interpretation, and advanced math strategies for top scores.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
-            <h3>IELTS / SAT</h3>
-            <p>Mathematics and analytical writing support, plus test-taking techniques for international exams.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-school"></i></div>
-            <h3>A-Level & O-Level Math</h3>
-            <p>Pure Math, Mechanics, Statistics. Cambridge & Edexcel curricula covered in depth.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-user-graduate"></i></div>
-            <h3>JHS / SHS & University Math</h3>
-            <p>Core and elective mathematics, calculus, linear algebra, and engineering math support.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="research">
-      <div class="container" style="max-width: 900px; text-align: center;">
-        <h2 class="section-title">Undergraduate & Postgraduate Research</h2>
-        <p style="font-size: 1.2rem; color: #334155; margin-bottom: 30px;">
-          From proposal to final defense, ODK Solutions Hub provides end-to-end research support. We perform rigorous data analysis (quantitative & qualitative) and craft comprehensive discussions that align with academic standards. Our goal is to help you defend your work with clarity and earn the grade you deserve.
+<!-- ═══ HERO ═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge">Trusted by 500+ Students Across the Globe</div>
+        <h1 class="hero-title">
+          Unlock Your <em>Academic</em><br />Potential with Expert<br />Guidance
+        </h1>
+        <p class="hero-desc">
+          ODK Solutions Hub delivers world-class data analysis training, expert mathematics tutoring, and comprehensive research support — empowering students at every academic level to excel with confidence.
         </p>
-        <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
-          <div style="background: #eff6ff; padding: 20px; border-radius: 20px; width: 200px;">
-            <i class="fas fa-database" style="font-size: 2rem; color: #2563eb;"></i>
-            <h4 style="margin-top: 12px;">Data Cleaning</h4>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">Explore Services ↓</a>
+          <a href="#cta" class="btn btn-outline">Contact Us</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">500+</div>
+            <div class="hero-stat-label">Students Supported</div>
           </div>
-          <div style="background: #eff6ff; padding: 20px; border-radius: 20px; width: 200px;">
-            <i class="fas fa-chart-pie" style="font-size: 2rem; color: #2563eb;"></i>
-            <h4 style="margin-top: 12px;">Statistical Modeling</h4>
+          <div>
+            <div class="hero-stat-num">98%</div>
+            <div class="hero-stat-label">Success Rate</div>
           </div>
-          <div style="background: #eff6ff; padding: 20px; border-radius: 20px; width: 200px;">
-            <i class="fas fa-pen-fancy" style="font-size: 2rem; color: #2563eb;"></i>
-            <h4 style="margin-top: 12px;">Discussion & Write-up</h4>
+          <div>
+            <div class="hero-stat-num">10+</div>
+            <div class="hero-stat-label">Years Experience</div>
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="testimonials" style="background: #ffffff;">
-      <div class="container">
-        <h2 class="section-title">What Our Students Say</h2>
-        <p class="section-subtitle">Real feedback from some students and researchers we've supported.</p>
-        <div class="testimonial-grid">
-          <div class="testimonial">
-            <div class="stars">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      <div class="hero-right">
+        <div class="hero-card-stack">
+          <div class="hero-floating-card hero-floating-card-1">
+            <div class="hfc-label">Student Success Rate</div>
+            <div class="hfc-value">98% <span>↑ Excellent</span></div>
+          </div>
+          <div class="hero-main-card">
+            <div class="hero-card-icon">📊</div>
+            <div class="hero-card-title">Data Analysis & Research Support</div>
+            <div class="hero-card-text">From Stata and R to Python — we guide you through every step of your research analysis and results discussion.</div>
+            <div class="hero-services-pills">
+              <span class="pill">SPSS</span>
+              <span class="pill">R Studio</span>
+              <span class="pill">Python</span>
+              <span class="pill">Stata</span>
+              <span class="pill">Excel</span>
             </div>
-            <p>"ODK Solutions Hub transformed my GRE quantitative score. The data analysis approach made difficult concepts simple. I moved from 148 to 164!"</p>
-            <div class="student">Harriet Agyeiwaa Frimpong</div>
-            <div class="role">GRE Candidate, Qatar</div>
           </div>
-          <div class="testimonial">
-            <div class="stars">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p>"My postgraduate thesis was stuck until I found ODK. They analyzed my data and explained every result. I defended with confidence. Highly recommended!"</p>
-            <div class="student">Kofi Asante</div>
-            <div class="role">MPhil Education, University of Cape Coast</div>
-          </div>
-          <div class="testimonial">
-            <div class="stars">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p>"A-Level Further Math was a nightmare, but Mr. Obeng's tutoring made it enjoyable. I got an A*!"</p>
-            <div class="student">Benard Thorpe</div>
-            <div class="role">A-Level Student, England</div>
-          </div>
-          <div class="testimonial">
-            <div class="stars">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-            </div>
-            <p>"I needed R analysis for my undergraduate project. ODK delivered clean results and a detailed interpretation. My supervisor was impressed."</p>
-            <div class="student">Deborah Bani</div>
-            <div class="role">BSc Dentistry, KNUST</div>
+          <div class="hero-floating-card hero-floating-card-2">
+            <div class="hfc-label">Programs Offered</div>
+            <div class="hfc-value">20+ <span>↑ Courses</span></div>
           </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-logo">
-            <img src="image.jpg" alt="ODK logo small" 
-                 onerror="this.style.display='none';">
-            <p><strong>ODK Solutions Hub</strong><br>Obeng Dominic Koranteng</p>
-          </div>
-          <p style="margin-top: 12px; color: #cbd5e1;">Empowering students through data & mathematics.</p>
-        </div>
-
-        <div class="footer-contact">
-          <h4 style="margin-bottom: 16px; color: white;">📞 Contact & Inquiries</h4>
-          <a href="mailto:odksolutionshub@gmail.com"><i class="fas fa-envelope"></i> odksolutionshub@gmail.com</a>
-          <a href="tel:+233245051371"><i class="fas fa-phone-alt"></i> +233 24 505 1371</a>
-          <p><i class="fas fa-map-marker-alt"></i> Accra, Ghana (Remote & In-person)</p>
-        </div>
-
-        <div class="footer-links">
-          <h4 style="margin-bottom: 16px; color: white;">🔗 Quick Links</h4>
-          <a href="#">Home</a>
-          <a href="#services">Services</a>
-          <a href="#test-prep">Test Prep</a>
-          <a href="#research">Research Support</a>
-          <a href="#testimonials">Testimonials</a>
-        </div>
-
-        <div>
-          <h4 style="margin-bottom: 16px; color: white;">📱 Follow ODK Solutions Hub</h4>
-          <div class="social-links">
-            <a href="https://wa.me/233245051371" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
-              <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/obeng-dominic-koranteng" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://www.tiktok.com/@odksolutionshub" target="_blank" rel="noopener noreferrer" aria-label="TikTok" title="TikTok">
-              <i class="fab fa-tiktok"></i>
-            </a>
-            <a href="https://www.facebook.com/odksolutionshub" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/odksolutionshub" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </div>
-          <p style="margin-top: 18px; font-size: 0.85rem; color: #94a3b8;">Connect with us for tips & updates</p>
-        </div>
-      </div>
-      <div class="copyright">
-        &copy; 2025 ODK Solutions Hub – Obeng Dominic Koranteng. All rights reserved.
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <span class="tag">What We Offer</span>
+      <h2 class="section-title">Comprehensive Academic<br />Support Services</h2>
+      <p class="section-sub">From foundational mathematics to advanced research analysis — we cover every dimension of your academic journey.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">📊</div>
+        <div class="service-title">Data Analysis Training</div>
+        <div class="service-desc">Hands-on training in industry-standard statistical tools and software. Learn to collect, clean, analyse, and visualize data with confidence.</div>
+        <div class="service-tags">
+          <span class="service-tag">SPSS</span>
+          <span class="service-tag">R Studio</span>
+          <span class="service-tag">Python</span>
+          <span class="service-tag">Stata</span>
+          <span class="service-tag">Excel</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🔬</div>
+        <div class="service-title">Research Data Analysis Support</div>
+        <div class="service-desc">Expert assistance for undergraduate and postgraduate students with rigorous data analysis, interpretation, and comprehensive discussion of results.</div>
+        <div class="service-tags">
+          <span class="service-tag">Dissertation</span>
+          <span class="service-tag">Thesis</span>
+          <span class="service-tag">Quantitative</span>
+          <span class="service-tag">Qualitative</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">➗</div>
+        <div class="service-title">Mathematics Tutoring</div>
+        <div class="service-desc">Expert math tutoring for all levels — from JHS and SHS through A-Level, O-Level, and university mathematics courses.</div>
+        <div class="service-tags">
+          <span class="service-tag">JHS/SHS</span>
+          <span class="service-tag">A-Level</span>
+          <span class="service-tag">O-Level</span>
+          <span class="service-tag">University</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🌍</div>
+        <div class="service-title">International Test Prep</div>
+        <div class="service-desc">Targeted preparation for major international standardized tests with proven strategies, practice materials, and personalized coaching.</div>
+        <div class="service-tags">
+          <span class="service-tag">GRE</span>
+          <span class="service-tag">GMAT</span>
+          <span class="service-tag">IELTS</span>
+          <span class="service-tag">SAT</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎓</div>
+        <div class="service-title">Academic & Research Support</div>
+        <div class="service-desc">Comprehensive academic support for students across all levels — research design, literature review, methodology, and academic writing.</div>
+        <div class="service-tags">
+          <span class="service-tag">Research Design</span>
+          <span class="service-tag">Literature Review</span>
+          <span class="service-tag">Methodology</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💡</div>
+        <div class="service-title">Personalized Learning Plans</div>
+        <div class="service-desc">Customized learning paths designed around your unique goals, pace, and academic requirements — ensuring maximum impact in minimum time.</div>
+        <div class="service-tags">
+          <span class="service-tag">One-on-One</span>
+          <span class="service-tag">Group Sessions</span>
+          <span class="service-tag">Online</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY US ═══════════════════════════════════════════ -->
+<section id="why">
+  <div class="container">
+    <div class="why-inner">
+      <div class="why-left reveal">
+        <span class="tag">Why Choose Us</span>
+        <h2 class="section-title">Your Success Is Our<br />Core Mission</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.6)">We don't just teach — we empower. Our approach combines expert knowledge with genuine mentorship to produce measurable results.</p>
+        <div class="why-features">
+          <div class="why-feature">
+            <div class="why-feature-icon">🎯</div>
+            <div>
+              <div class="why-feature-title">Result-Oriented Approach</div>
+              <div class="why-feature-text">Every session is targeted towards measurable academic outcomes — from improved grades to successful thesis defenses.</div>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feature-icon">👨‍🏫</div>
+            <div>
+              <div class="why-feature-title">Expert & Experienced Tutors</div>
+              <div class="why-feature-text">Our team brings deep subject-matter expertise and real-world experience across mathematics, statistics, and research methods.</div>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feature-icon">🤝</div>
+            <div>
+              <div class="why-feature-title">Personalized Attention</div>
+              <div class="why-feature-text">We tailor every session to your specific needs, ensuring you grasp concepts at your own pace with full confidence.</div>
+            </div>
+          </div>
+          <div class="why-feature">
+            <div class="why-feature-icon">🌐</div>
+            <div>
+              <div class="why-feature-title">Flexible Online & In-Person</div>
+              <div class="why-feature-text">Access our services from anywhere — fully online, hybrid, or in-person sessions scheduled to fit your calendar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-right reveal">
+        <div class="why-stat-card">
+          <span class="wsc-num">500+</span>
+          <div class="wsc-label">Students Successfully Supported</div>
+        </div>
+        <div class="why-stat-card">
+          <span class="wsc-num">98%</span>
+          <div class="wsc-label">Client Satisfaction Rate</div>
+        </div>
+        <div class="why-stat-card">
+          <span class="wsc-num">10+</span>
+          <div class="wsc-label">Years of Teaching Excellence</div>
+        </div>
+        <div class="why-stat-card">
+          <span class="wsc-num">20+</span>
+          <div class="wsc-label">Specialized Programs Offered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAMS ═════════════════════════════════════════ -->
+<section id="programs">
+  <div class="container">
+    <div class="programs-header reveal">
+      <span class="tag">Programs & Courses</span>
+      <h2 class="section-title">Find the Right Program<br />for Your Level</h2>
+      <p class="section-sub">Whether you're in JHS or pursuing a postgraduate degree, we have a program tailored for you.</p>
+      <div class="programs-tabs">
+        <button class="prog-tab active" data-filter="all">All Programs</button>
+        <button class="prog-tab" data-filter="math">Mathematics</button>
+        <button class="prog-tab" data-filter="data">Data Analysis</button>
+        <button class="prog-tab" data-filter="test">Test Prep</button>
+        <button class="prog-tab" data-filter="research">Research</button>
+      </div>
+    </div>
+    <div class="programs-grid" id="programsGrid">
+      <div class="prog-card reveal" data-cat="math">
+        <span class="prog-level">Basic Level</span>
+        <div class="prog-name">JHS Mathematics</div>
+        <div class="prog-desc">Core mathematics for Junior High School students covering number theory, basic algebra, geometry, and data handling.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Level: <strong>JHS 1–3</strong></span>
+          <span class="prog-badge">✦ Popular</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="math">
+        <span class="prog-level">Secondary Level</span>
+        <div class="prog-name">SHS / O-Level Mathematics</div>
+        <div class="prog-desc">Comprehensive senior high school mathematics — algebra, trigonometry, calculus foundations, probability and statistics.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Level: <strong>SHS / O-Level</strong></span>
+          <span class="prog-badge">✦ Popular</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="math">
+        <span class="prog-level">Advanced Secondary</span>
+        <div class="prog-name">A-Level Mathematics</div>
+        <div class="prog-desc">Advanced mathematics covering pure math, mechanics, and statistics — ideal for Cambridge, WAEC, and international board students.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Level: <strong>A-Level</strong></span>
+          <span class="prog-badge">✦ Advanced</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="math">
+        <span class="prog-level">Tertiary</span>
+        <div class="prog-name">University Mathematics</div>
+        <div class="prog-desc">Support for university-level courses including calculus, linear algebra, real analysis, differential equations, and discrete mathematics.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Level: <strong>Undergraduate</strong></span>
+          <span class="prog-badge">✦ University</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="data">
+        <span class="prog-level">Beginner–Advanced</span>
+        <div class="prog-name">Data Analysis</div>
+        <div class="prog-desc">From data entry to advanced inferential statistics — master SPSS for your research and academic assignments.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Tool: <strong>Stata, SPSS, Excel, R, Python</strong></span>
+          <span class="prog-badge">✦ Most Requested</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="data">
+        <span class="prog-level">Intermediate–Advanced</span>
+        <div class="prog-name">R & Python for Research</div>
+        <div class="prog-desc">Statistical programming with R and Python for data wrangling, visualization, regression, and machine learning applications.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Tools: <strong>R, Python</strong></span>
+          <span class="prog-badge">✦ Trending</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="test">
+        <span class="prog-level">Graduate Admission</span>
+        <div class="prog-name">GRE / GMAT Quantitative</div>
+        <div class="prog-desc">Intensive quantitative reasoning preparation for GRE and GMAT — covering algebra, data interpretation, geometry, and problem solving.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Exam: <strong>GRE / GMAT</strong></span>
+          <span class="prog-badge">✦ High Demand</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="test">
+        <span class="prog-level">Undergraduate Admission</span>
+        <div class="prog-name">SAT Mathematics</div>
+        <div class="prog-desc">Targeted SAT math preparation with strategy, practice tests, and skill-building sessions for maximum score improvement.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Exam: <strong>SAT</strong></span>
+          <span class="prog-badge">✦ Popular</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="research">
+        <span class="prog-level">Undergraduate</span>
+        <div class="prog-name">Undergraduate Thesis Support</div>
+        <div class="prog-desc">Full research support from topic selection, methodology design, data analysis, and results discussion to final submission.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Level: <strong>Bachelor's</strong></span>
+          <span class="prog-badge">✦ Comprehensive</span>
+        </div>
+      </div>
+      <div class="prog-card reveal" data-cat="research">
+        <span class="prog-level">Postgraduate</span>
+        <div class="prog-name">Postgraduate Research Support</div>
+        <div class="prog-desc">Specialized support for master's and PhD candidates — rigorous data analysis, results interpretation, and academic writing guidance.</div>
+        <div class="prog-meta">
+          <span class="prog-meta-item">Level: <strong>MSc / PhD</strong></span>
+          <span class="prog-badge">✦ Expert Level</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ════════════════════════════════════ -->
+<section id="process">
+  <div class="container">
+    <div class="process-header reveal">
+      <span class="tag">How It Works</span>
+      <h2 class="section-title">Your Journey to Academic<br />Excellence in 4 Steps</h2>
+      <p class="section-sub">Getting started is simple. We guide you every step of the way from first contact to achieving your goals.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-title">Reach Out</div>
+        <div class="step-text">Contact us via WhatsApp, email, or our online form. Tell us your academic goals and challenges.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <div class="step-title">Free Consultation</div>
+        <div class="step-text">We assess your needs and recommend the right program or service tailored to your level and goals.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <div class="step-title">Start Learning</div>
+        <div class="step-text">Begin your personalized sessions — online or in-person — with expert guidance and structured materials.</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">4</div>
+        <div class="step-title">Achieve Excellence</div>
+        <div class="step-text">Gain the skills, confidence, and academic results you need to succeed and advance your career.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testi-header reveal">
+      <span class="tag">Student Testimonials</span>
+      <h2 class="section-title">What Our Students<br />Are Saying</h2>
+      <p class="section-sub">Real results from real students. Our community of learners consistently achieves their academic goals with our support.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card featured reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">ODK Solutions Hub transformed my approach to data analysis entirely. I was struggling with my thesis methodology but after just a few sessions, I was able to confidently run my regression models and interpret the results. My supervisor was genuinely impressed.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--gold);color:var(--navy-dark);">AK</div>
+          <div>
+            <div class="testi-name">Ama Konadu</div>
+            <div class="testi-role">MSc Economics, University of Ghana</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">I failed General Mathematics twice before finding ODK Solutions Hub. Mr. Obeng's teaching style is clear, patient, and practical. I scored A in my WASSCE mathematics. I couldn't believe it!</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#dbeafe;color:#1e3a8a;">KO</div>
+          <div>
+            <div class="testi-name">Asomdwe</div>
+            <div class="testi-role">University of Ghana, Graduate</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The GRE prep sessions were outstanding. I improved my score by 12 points in just 6 weeks. The personalized approach and targeted practice made all the difference.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#d1fae5;color:#065f46;">NB</div>
+          <div>
+            <div class="testi-name">Priscilla</div>
+            <div class="testi-role">GRE Candidate, Applying to US Graduate Programs</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">ODK helped me with my MPhil data analysis using R. The depth of knowledge, patience, and dedication to ensuring I understood every step of the process was remarkable. Highly recommended!</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#fce7f3;color:#9d174d;">EA</div>
+          <div>
+            <div class="testi-name">Mr. Samuel</div>
+            <div class="testi-role">MPhil Candidate, UCC</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">As an international student, I needed IELTS prep alongside my math studies. ODK Solutions Hub handled both seamlessly. The flexibility to learn online was a huge plus for me.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#ede9fe;color:#4c1d95;">SK</div>
+          <div>
+            <div class="testi-name">Samuel Kumi</div>
+            <div class="testi-role">IELTS Candidate & A-Level Student</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">My son struggled with JHS mathematics but after enrolling with ODK Solutions Hub, his confidence grew tremendously. He now enjoys math and recently topped his class. We are forever grateful!</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#fef3c7;color:#78350f;">PA</div>
+          <div>
+            <div class="testi-name">Patricia Agyemang</div>
+            <div class="testi-role">Parent of JHS 3 Student, Accra</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-image-block reveal">
+        <div class="about-img-card">
+          <div class="about-img-card-content">
+            <div class="about-big-icon">🎓</div>
+            <div class="about-card-name">Obeng Dominic Koranteng</div>
+            <div class="about-card-title">Founder & Lead Tutor, ODK Solutions Hub</div>
+            <div style="margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+              <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;text-align:center;">
+                <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--gold);">10+</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:3px;">Years Teaching</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;text-align:center;">
+                <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--gold);">500+</div>
+                <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:3px;">Students</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-floating about-floating-1">
+          <div class="about-fl-val">🏆 98%</div>
+          <div class="about-fl-label">Success Rate</div>
+        </div>
+        <div class="about-floating about-floating-2">
+          <div class="about-fl-val">📍 Ghana</div>
+          <div class="about-fl-label">Serving Africa & Beyond</div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <span class="tag">About Us</span>
+        <h2 class="section-title">Obeng Dominic Koranteng Solutions Hub</h2>
+        <p>ODK Solutions Hub was founded with a singular mission: to make high-quality academic support accessible to every student, regardless of their level or background. Based in Ghana, we serve students across Africa and beyond through flexible online and in-person sessions.</p>
+        <h3>Our Mission</h3>
+        <p>To empower students at all academic levels with expert knowledge, practical skills, and the confidence to achieve academic excellence — through personalized tutoring, rigorous data analysis support, and comprehensive research guidance.</p>
+        <h3>Our Expertise</h3>
+        <p>Our principal activities include data analysis training, academic and research support, expert mathematics tutoring, and international test preparation. We specialize in working with students from JHS all the way through to PhD level, helping each one achieve their full potential.</p>
+        <div class="about-certs">
+          <div class="cert-badge"><span>✓</span> Mathematics Expert</div>
+          <div class="cert-badge"><span>✓</span> Data Analysis Specialist</div>
+          <div class="cert-badge"><span>✓</span> Research Methodology</div>
+          <div class="cert-badge"><span>✓</span> Test Prep Coach</div>
+          <div class="cert-badge"><span>✓</span> Academic Writing Support</div>
+        </div>
+        <div style="margin-top:32px;">
+          <a href="#cta" class="btn btn-navy">Work With Us →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ══════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-header reveal">
+      <span class="tag">FAQs</span>
+      <h2 class="section-title">Frequently Asked<br />Questions</h2>
+      <p class="section-sub">Everything you need to know before getting started with ODK Solutions Hub.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Do you offer online sessions? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes! All our services are available online via Zoom, Google Meet, or WhatsApp Video. We also offer in-person sessions for students within Accra and select locations in Ghana. Our flexible approach means you can learn from anywhere in the world.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What data analysis software do you teach? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We offer training and support across all major statistical tools including SPSS, R Studio, Python (pandas, scipy, seaborn), Stata, Microsoft Excel, and AMOS for structural equation modelling. We match the tool to your academic or professional requirements.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How quickly can I get research data analysis support? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We understand deadlines are critical. Once you reach out and share your dataset and requirements, we typically begin within 24–48 hours. Urgent requests can be accommodated — contact us directly to discuss your timeline.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you work with postgraduate (Masters and PhD) students? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Absolutely. A significant portion of our work is with masters and PhD students who require advanced data analysis, results interpretation, and academic discussion. We handle quantitative, qualitative, and mixed-methods research.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What international exams do you prepare students for? <span class="faq-icon">+</span></button>
+        <div class="faq-a">We specialize in GRE (Quantitative Reasoning), GMAT (Quantitative & Data Insights), SAT (Math sections), IELTS (Academic), and other standardized tests. Our preparation combines strategy, targeted practice, and concept reinforcement for maximum score improvement.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How much do your services cost? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Our pricing varies by service type, session duration, and level of support required. We offer competitive and affordable rates with flexible payment options. Contact us for a free consultation and a customized quote tailored to your specific needs.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is there a free consultation before I commit? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes! We offer a free initial consultation to discuss your academic goals, assess your current level, and recommend the most appropriate service or program. There is absolutely no obligation. Reach out via WhatsApp or email to book yours today.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══════════════════════════════════════════════ -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <span class="tag">Get Started Today</span>
+      <h2 class="cta-title">Ready to <em>Transform</em> Your<br />Academic Journey?</h2>
+      <p class="cta-sub">Join hundreds of students who have achieved their academic goals with ODK Solutions Hub. Your success starts with one conversation.</p>
+      <div class="cta-actions">
+        <a href="https://wa.me/233245051371" class="btn btn-primary" target="_blank">💬 WhatsApp Us Now</a>
+        <a href="mailto:odksolutionshub@gmail.com" class="btn btn-outline">✉ Send an Email</a>
+      </div>
+      <div class="cta-contact">
+        <a href="https://wa.me/233245051371" class="contact-item" target="_blank">
+          <div class="contact-item-icon">📱</div>
+          <div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);">WhatsApp / Phone</div>
+            <div style="color:var(--white);font-weight:600;">+233 245 051 371</div>
+          </div>
+        </a>
+        <a href="mailto:odksolutionshub@gmail.com" class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          <div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);">Email</div>
+            <div style="color:var(--white);font-weight:600;">odksolutionshub@gmail.com</div>
+          </div>
+        </a>
+        <a href="#" class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);">Location</div>
+            <div style="color:var(--white);font-weight:600;">Accra, Ghana (Online & In-Person)</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="footer-logo">
+          <div class="footer-logo-text"><span>ODK</span> Solutions Hub</div>
+        </a>
+        <p>Obeng Dominic Koranteng Solutions Hub — empowering students through expert data analysis training, mathematics tutoring, and academic research support.</p>
+        <div class="footer-socials" style="margin-top:22px;">
+          <a href="#" class="social-btn" title="Facebook">f</a>
+          <a href="#" class="social-btn" title="TikTok">TikTok</a>
+          <a href="#" class="social-btn" title="Instagram">insta</a>
+          <a href="#" class="social-btn" title="LinkedIn">in</a>
+          <a href="#" class="social-btn" title="WhatsApp">💬</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Data Analysis Training</a></li>
+          <li><a href="#services">Research Support</a></li>
+          <li><a href="#services">Mathematics Tutoring</a></li>
+          <li><a href="#services">Test Preparation</a></li>
+          <li><a href="#services">Academic Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#programs">JHS Mathematics</a></li>
+          <li><a href="#programs">SHS / O-Level Math</a></li>
+          <li><a href="#programs">A-Level Mathematics</a></li>
+          <li><a href="#programs">University Math</a></li>
+          <li><a href="#programs">GRE / GMAT Prep</a></li>
+          <li><a href="#programs">Thesis & Research</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#process">How It Works</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#cta">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 ODK Solutions Hub — Obeng Dominic Koranteng. All rights reserved.</span>
+      <span>Accra, Ghana 🇬🇭 | Serving Students Globally 🌍</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ SCRIPTS ═══════════════════════════════════════════ -->
+<script>
+  // ── Navbar scroll effect ──────────────────────────────
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // ── Mobile menu ───────────────────────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link, .mobile-menu .btn').forEach(el => {
+    el.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // ── Scroll reveal ─────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => revealObs.observe(el));
+
+  // ── Program filter tabs ───────────────────────────────
+  const tabs = document.querySelectorAll('.prog-tab');
+  const cards = document.querySelectorAll('.prog-card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.cat === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // ── FAQ accordion ─────────────────────────────────────
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // ── Smooth scroll for anchor links ───────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
