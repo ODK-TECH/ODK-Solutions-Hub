@@ -621,6 +621,18 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
+    .testi-row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+    @media (max-width: 960px) {
+      .testi-row-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .testi-row-2 { gap: 18px; margin-top: 18px; }
+    }
     .testi-card {
       background: var(--off-white);
       border-radius: var(--radius);
@@ -964,7 +976,7 @@
       .why-stat-card:nth-child(2), .why-stat-card:nth-child(4) { margin-top: 0; }
       .steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
       .steps::before { display: none; }
-      .testi-grid { grid-template-columns: 1fr; }
+      .testi-grid, .testi-row-2 { grid-template-columns: 1fr; }
       .about-inner { grid-template-columns: 1fr; }
       .about-image-block { display: none; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
@@ -1464,6 +1476,7 @@
       <h2 class="section-title">What Our Students<br />Are Saying</h2>
       <p class="section-sub">Real results from real students. Our community of learners consistently achieves their academic goals with our support.</p>
     </div>
+    <!-- Row 1: 3 columns -->
     <div class="testi-grid">
       <div class="testi-card featured reveal">
         <div class="testi-stars">★★★★★</div>
@@ -1480,7 +1493,7 @@
       <div class="testi-card reveal">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-quote">"</div>
-        <div class="testi-text">I failed mathematics twice before finding ODK Solutions Hub. Mr. Obeng's teaching style is clear, patient, and practical. I scored A in my WASSCE mathematics. I couldn't believe it!</div>
+        <div class="testi-text">I failed mathematics twice before finding ODK Solutions Hub. Mr. Obeng's teaching style is clear, patient, and practical. I scored A in my WASSCE mathematics. I couldn't believe it — my whole family celebrated!</div>
         <div class="testi-author">
           <div class="testi-avatar" style="background:#dbeafe;color:#1e3a8a;">KO</div>
           <div>
@@ -1492,7 +1505,7 @@
       <div class="testi-card reveal">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-quote">"</div>
-        <div class="testi-text">The GRE quantitative prep sessions were outstanding. I improved my score by 12 points in just 6 weeks. The personalized approach and targeted practice made all the difference.</div>
+        <div class="testi-text">The GRE quantitative prep sessions were outstanding. I improved my score by 12 points in just 6 weeks. The personalized approach and targeted practice made all the difference for my US graduate school application.</div>
         <div class="testi-author">
           <div class="testi-avatar" style="background:#d1fae5;color:#065f46;">NB</div>
           <div>
@@ -1504,7 +1517,7 @@
       <div class="testi-card reveal">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-quote">"</div>
-        <div class="testi-text">ODK helped me with my PhD data analysis using R. The depth of knowledge, patience, and dedication to ensuring I understood every step of the process was remarkable. Highly recommended!</div>
+        <div class="testi-text">ODK helped me with my PhD data analysis using R. The depth of knowledge, patience, and dedication to ensuring I understood every step of the process was remarkable. I passed my viva with no major corrections!</div>
         <div class="testi-author">
           <div class="testi-avatar" style="background:#fce7f3;color:#9d174d;">EA</div>
           <div>
@@ -1516,24 +1529,116 @@
       <div class="testi-card reveal">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-quote">"</div>
-        <div class="testi-text">As an international student, I needed IELTS prep alongside my math studies. ODK Solutions Hub handled both seamlessly. The flexibility to learn online was a huge plus for me.</div>
+        <div class="testi-text">As an international student, I needed IELTS prep alongside my math studies. ODK Solutions Hub handled both seamlessly. The flexibility to learn online from Nigeria was a huge advantage I didn't expect.</div>
         <div class="testi-author">
           <div class="testi-avatar" style="background:#ede9fe;color:#4c1d95;">SK</div>
           <div>
             <div class="testi-name">Samuel Kumi</div>
-            <div class="testi-role">IELTS Candidate & A-Level Student</div>
+            <div class="testi-role">IELTS Candidate & A-Level Student, Nigeria</div>
           </div>
         </div>
       </div>
       <div class="testi-card reveal">
         <div class="testi-stars">★★★★★</div>
         <div class="testi-quote">"</div>
-        <div class="testi-text">My son struggled with JHS mathematics but after enrolling with ODK Solutions Hub, his confidence grew tremendously. He now enjoys math and recently topped his class. We are forever grateful!</div>
+        <div class="testi-text">My son struggled with JHS mathematics but after enrolling with ODK Solutions Hub, his confidence grew tremendously. He now enjoys math and recently topped his class. We are forever grateful to Mr. Obeng!</div>
         <div class="testi-author">
           <div class="testi-avatar" style="background:#fef3c7;color:#78350f;">PA</div>
           <div>
             <div class="testi-name">Patricia Agyemang</div>
             <div class="testi-role">Parent of JHS 3 Student, Kumasi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 2 wider columns -->
+    <div class="testi-row-2">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">I was completely lost with SPSS when my supervisor asked me to run a factor analysis. ODK Solutions Hub walked me through the entire process step by step — from data cleaning to interpretation. I submitted my results with full confidence and my supervisor had zero corrections on the analysis chapter.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#dcfce7;color:#14532d;">BO</div>
+          <div>
+            <div class="testi-name">Bright Owusu</div>
+            <div class="testi-role">MSc Public Health, University of Cape Coast</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card featured reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">The A-Level mathematics tutoring I received from ODK Solutions Hub was exceptional. The explanations were so clear and structured that even the hardest pure math topics became manageable. I achieved an A grade and secured my university admission. I cannot recommend this service enough to any A-Level student.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--gold);color:var(--navy-dark);">RA</div>
+          <div>
+            <div class="testi-name">Rhoda Acheampong</div>
+            <div class="testi-role">A-Level Graduate, Now at University of Leeds, UK</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">I contacted ODK Solutions Hub two weeks before my thesis submission deadline, completely panicking about my data analysis. Mr. Obeng was calm, professional, and incredibly efficient. He helped me run the right tests in Stata, interpret the output, and write up the results clearly. I submitted on time and passed with distinction.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#ffedd5;color:#7c2d12;">JM</div>
+          <div>
+            <div class="testi-name">Joyce Mensah</div>
+            <div class="testi-role">MBA Graduate, Ghana Institute of Management and Public Administration</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">After failing the GMAT quantitative section twice, a friend referred me to ODK Solutions Hub. The targeted coaching completely changed my understanding of data sufficiency and problem solving. I scored 48/51 on my third attempt. The structured preparation and encouragement made the difference I needed.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#e0f2fe;color:#0c4a6e;">KA</div>
+          <div>
+            <div class="testi-name">Kofi Adu-Mensah</div>
+            <div class="testi-role">GMAT Candidate, Pursuing MBA Abroad</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: 3 columns -->
+    <div class="testi-grid" style="margin-top:24px;">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">University calculus was destroying my GPA until I found ODK. After just four sessions, I went from a failing grade to scoring 82% in my midterm exam. The way concepts are broken down is truly world-class.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#f3e8ff;color:#581c87;">DA</div>
+          <div>
+            <div class="testi-name">Dorcas Appiah</div>
+            <div class="testi-role">BSc Engineering, Ashesi University</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">ODK Solutions Hub supported my mixed-methods research beautifully. The qualitative thematic analysis and quantitative SPSS work were both handled with great expertise. I defended my thesis successfully. My committee was impressed by the rigour of my analysis.</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#fef9c3;color:#713f12;">FD</div>
+          <div>
+            <div class="testi-name">Felicia Darkwah</div>
+            <div class="testi-role">MPhil Education, University of Education, Winneba</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"</div>
+        <div class="testi-text">I prepared for my SAT with ODK Solutions Hub while also revising O-Level maths for my school exams. Juggling both was manageable because the sessions were well-organized and always tailored to exactly what I needed. Scored 760 on SAT Math!</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#cffafe;color:#164e63;">AO</div>
+          <div>
+            <div class="testi-name">Aaron Ofori</div>
+            <div class="testi-role">O-Level & SAT Student, Takoradi</div>
           </div>
         </div>
       </div>
@@ -1575,7 +1680,7 @@
       <div class="about-text reveal">
         <span class="tag">About Us</span>
         <h2 class="section-title">Obeng Dominic Koranteng Solutions Hub</h2>
-        <p>ODK Solutions Hub was founded with a singular mission: to make high-quality academic support accessible to every student, regardless of their level or background. Based in Ghana, we serve students across Africa and beyond through flexible online and in-person sessions.</p>
+        <p>ODK Solutions Hub was officially established in September 2025 with a singular mission: to make high-quality academic support accessible to every student, regardless of their level or background. Based in Ghana, we serve students across Africa and beyond through flexible online and in-person sessions.</p>
         <h3>Our Mission</h3>
         <p>To empower students at all academic levels with expert knowledge, practical skills, and the confidence to achieve academic excellence — through personalized tutoring, rigorous data analysis support, and comprehensive research guidance.</p>
         <h3>Our Expertise</h3>
@@ -1610,7 +1715,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">What data analysis software do you teach? <span class="faq-icon">+</span></button>
-        <div class="faq-a">We offer training and support across all major statistical tools including SPSS, R Studio, Python (pandas, scipy, seaborn), Stata, Microsoft Excel, and AMOS for structural equation modelling. We match the tool to your academic or professional requirements.</div>
+        <div class="faq-a">We offer training and support across all major statistical tools including SPSS, R Studio, Python (pandas, scipy, seaborn), Stata, Microsoft Excel, and SQL. We match the tool to your academic or professional requirements.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q">How quickly can I get research data analysis support? <span class="faq-icon">+</span></button>
@@ -1622,7 +1727,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">What international exams do you prepare students for? <span class="faq-icon">+</span></button>
-        <div class="faq-a">We specialize in GRE (Quantitative Reasoning), GMAT (Quantitative & Data Insights), SAT (Math sections), IELTS (Academic), and other standardized tests. Our preparation combines strategy, targeted practice, and concept reinforcement for maximum score improvement.</div>
+        <div class="faq-a">We specialize in GRE, GMAT, SAT, IELTS, and other standardized tests. Our preparation combines strategy, targeted practice, and concept reinforcement for maximum score improvement.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q">How much do your services cost? <span class="faq-icon">+</span></button>
@@ -1644,22 +1749,22 @@
       <h2 class="cta-title">Ready to <em>Transform</em> Your<br />Academic Journey?</h2>
       <p class="cta-sub">Join hundreds of students who have achieved their academic goals with ODK Solutions Hub. Your success starts with one conversation.</p>
       <div class="cta-actions">
-        <a href="https://wa.me/233000000000" class="btn btn-primary" target="_blank">💬 WhatsApp Us Now</a>
+        <a href="https://wa.me/233245051371" class="btn btn-primary" target="_blank">💬 WhatsApp Us Now</a>
         <a href="mailto:info@odksolutionshub.com" class="btn btn-outline">✉ Send an Email</a>
       </div>
       <div class="cta-contact">
-        <a href="https://wa.me/233000000000" class="contact-item" target="_blank">
+        <a href="https://wa.me/233245051371" class="contact-item" target="_blank">
           <div class="contact-item-icon">📱</div>
           <div>
             <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);">WhatsApp / Phone</div>
-            <div style="color:var(--white);font-weight:600;">+233 XXX XXX XXX</div>
+            <div style="color:var(--white);font-weight:600;">+233 245 051 371</div>
           </div>
         </a>
         <a href="mailto:info@odksolutionshub.com" class="contact-item">
           <div class="contact-item-icon">✉</div>
           <div>
             <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);">Email</div>
-            <div style="color:var(--white);font-weight:600;">info@odksolutionshub.com</div>
+            <div style="color:var(--white);font-weight:600;">odksolutionshub@gmail.com</div>
           </div>
         </a>
         <a href="#" class="contact-item">
